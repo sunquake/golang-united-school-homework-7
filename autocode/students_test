@@ -23,7 +23,7 @@ func init() {
 
 func TestLen(t *testing.T){
 
-	var p People
+	p := People{}
 	tNow := time.Now()
 	p = append(p, Person{firstName: "Joe1", lastName: "Trump1", birthDay: tNow})
 	p = append(p, Person{firstName: "Joe2", lastName: "Trump2", birthDay: tNow.Add(time.Hour * 24)})
@@ -34,7 +34,7 @@ func TestLen(t *testing.T){
 }
 
 func TestLess(t *testing.T){
-	var p People
+	p := People{}
 	tNow := time.Now()
 	p = append(p, Person{firstName: "Joe", lastName: "Trump", birthDay: tNow})
 	p = append(p, Person{firstName: "Donald", lastName: "Biden", birthDay: tNow})
