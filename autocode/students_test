@@ -22,14 +22,13 @@ func init() {
 // WRITE YOUR CODE BELOW
 
 func TestLen(t *testing.T){
+
 	var p People
 	tNow := time.Now()
 	p = append(p, Person{firstName: "Joe1", lastName: "Trump1", birthDay: tNow})
 	p = append(p, Person{firstName: "Joe2", lastName: "Trump2", birthDay: tNow.Add(time.Hour * 24)})
-	p = append(p, Person{firstName: "Joe3", lastName: "Trump3", birthDay: tNow.Add(time.Hour * 48)})
-	l := p.Len()
-	if l != 3 {
-		t.Errorf("Expected 3, got %d", l)
+	if p.Len() != 2 {
+		t.Errorf("Expected 3, got %d", p.Len())
 	}
 
 }
@@ -37,10 +36,11 @@ func TestLen(t *testing.T){
 func TestLess(t *testing.T){
 	var p People
 	tNow := time.Now()
-	p = append(p, Person{firstName: "Joe4", lastName: "Trump4", birthDay: tNow})
-	p = append(p, Person{firstName: "Joe3", lastName: "Trump3", birthDay: tNow})
-	p = append(p, Person{firstName: "Joe2", lastName: "Trump2", birthDay: tNow.Add(time.Hour * 24)})
-	p = append(p, Person{firstName: "Joe1", lastName: "Trump1", birthDay: tNow.Add(time.Hour * 48)})
+	p = append(p, Person{firstName: "Joe", lastName: "Trump", birthDay: tNow})
+	p = append(p, Person{firstName: "Donald", lastName: "Biden", birthDay: tNow})
+	p = append(p, Person{firstName: "Joe", lastName: "Trump", birthDay: tNow.Add(time.Hour * 24)})
+	p = append(p, Person{firstName: "Donald", lastName: "Biden", birthDay: tNow.Add(time.Hour * 48)})
+	p = append(p, Person{firstName: "Donald", lastName: "Putin", birthDay: tNow.Add(time.Hour * 48)})
 	
 	ler := p.Less(1,0)
 	if !ler{
@@ -50,12 +50,16 @@ func TestLess(t *testing.T){
 	if !ler{
 		t.Errorf("Expected true, got %v", ler)
 	}
+	ler = p.Less(3,4)
+	if !ler{
+		t.Errorf("Expected true, got %v", ler)
+	}
 }
 
 func TestSwap(t *testing.T){
 	var p People
-	p = append(p, Person{firstName: "Joe1", lastName: "Trump1", birthDay: time.Now()})
-	p = append(p, Person{firstName: "Joe2", lastName: "Trump2", birthDay: time.Now().Add(time.Hour * 24)})
+	p = append(p, Person{firstName: "Joe", lastName: "Trump", birthDay: time.Now()})
+	p = append(p, Person{firstName: "Donald", lastName: "Biden", birthDay: time.Now().Add(time.Hour * 24)})
 
 	p0 := p[0]
 
@@ -70,6 +74,14 @@ func TestSwap(t *testing.T){
 func TestNew(t *testing.T){
 	
 	_, err := New("1 2 3 4 5 6 7 8 9")
+	if err != nil {
+		t.Errorf("Error: %v", err)
+	}
+	_, err = New("1 2 3 4 5 6 7 8")
+	if err != nil {
+		t.Errorf("Error: %v", err)
+	}
+	_, err = New("1 2 3 4 5 6 7 8 a")
 	if err != nil {
 		t.Errorf("Error: %v", err)
 	}
