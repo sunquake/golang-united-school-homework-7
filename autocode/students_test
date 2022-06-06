@@ -81,7 +81,7 @@ func TestNew(t *testing.T){
 	if err != nil {
 		t.Errorf("Error: %v", err)
 	}
-	_, err = New("1 2 3 4 5 6 7 8 a")
+	_, err = New("1 2 3 4 5 6 7 8 9\n0 5 9 2 1 8 7 6 4")
 	if err != nil {
 		t.Errorf("Error: %v", err)
 	}
